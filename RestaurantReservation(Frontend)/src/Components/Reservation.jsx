@@ -48,7 +48,7 @@ const Reservation = () => {
 
     try {
       const { data } = await axios.post(
-        `${backendUrl}/reservation/send`,
+        `https://restaurant-reservation-mern-1-oava.onrender.com/api/v1/reservation/send`,
         {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
