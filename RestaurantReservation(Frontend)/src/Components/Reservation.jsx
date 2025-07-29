@@ -15,12 +15,12 @@ const Reservation = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleReservation = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // ✅ Basic frontend validation
     if (
       !firstName.trim() ||
       !lastName.trim() ||
@@ -36,7 +36,6 @@ const Reservation = () => {
       return;
     }
 
-    // ✅ Log payload for debugging
     console.log("Sending reservation data:", {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
@@ -49,7 +48,7 @@ const Reservation = () => {
 
     try {
       const { data } = await axios.post(
-        "https://restaurant-reservation-mern-1-oava.onrender.com/api/v1/reservation/send",
+        `${backendUrl}/reservation/send`,
         {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
@@ -69,7 +68,6 @@ const Reservation = () => {
 
       toast.success(data.message);
 
-      // ✅ Reset form
       setFirstName("");
       setLastName("");
       setEmail("");
@@ -99,66 +97,23 @@ const Reservation = () => {
             <p>For Further Questions, Please Call</p>
             <form onSubmit={handleReservation}>
               <div>
-                <input
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="First Name"
-                  required
-                />
-                <input
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Last Name"
-                  required
-                />
+                <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" required />
+                <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" required />
               </div>
               <div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  required
-                />
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Phone Number"
-                  required
-                />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone Number" required />
               </div>
               <div>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  required
-                />
-                <input
-                  type="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  required
-                />
+                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+                <input type="time" value={time} onChange={(e) => setTime(e.target.value)} required />
               </div>
               <div>
-                <input
-                  type="number"
-                  value={guests}
-                  onChange={(e) => setGuests(e.target.value)}
-                  placeholder="Number of Guests"
-                  min="1"
-                  required
-                />
+                <input type="number" value={guests} onChange={(e) => setGuests(e.target.value)} placeholder="Number of Guests" min="1" required />
               </div>
               <button type="submit" disabled={loading}>
                 {loading ? "Reserving..." : "RESERVE NOW"}{" "}
-                <span>
-                  <HiOutlineArrowNarrowRight />
-                </span>
+                <span><HiOutlineArrowNarrowRight /></span>
               </button>
             </form>
           </div>
