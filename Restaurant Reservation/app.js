@@ -23,6 +23,10 @@ app.use(express.urlencoded({ extended: true }));
 // ✅ Route registration
 app.use("/api/v1/reservation", reservationRouters);
 
+app.get("/",(req,res,next)=>{return res.status(200).json({
+  success:true,
+  message: "Hello World"
+})})
 // ✅ Database connection
 dbconnection();
 
