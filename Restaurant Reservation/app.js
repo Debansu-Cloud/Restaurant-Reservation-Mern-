@@ -12,7 +12,7 @@ dotenv.config({ path: './config/config.env' });
 
 // ✅ Apply CORS globally (recommended approach)
 app.use(cors({
-  origin: 'https://debansurestaurant.netlify.app/', // ✅ matches your frontend's port
+ origin: 'https://debansu.netlify.app', // ✅ matches your frontend's port
   methods: ['POST', 'OPTIONS'],
   credentials: true
 }));

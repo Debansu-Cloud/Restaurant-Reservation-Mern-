@@ -36,19 +36,9 @@ const Reservation = () => {
       return;
     }
 
-    console.log("Sending reservation data:", {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      email: email.trim(),
-      phone: phone.trim(),
-      date,
-      time,
-      guests: Number(guests)
-    });
-
     try {
       const { data } = await axios.post(
-        `https://restaurant-reservation-mern-1-oava.onrender.com/api/v1/reservation/send`,
+        `${backendUrl}/api/v1/reservation/send`,
         {
           firstName: firstName.trim(),
           lastName: lastName.trim(),
@@ -78,7 +68,6 @@ const Reservation = () => {
 
       navigate("/success");
     } catch (error) {
-      console.error("Reservation error:", error.response?.data || error);
       toast.error(error.response?.data?.message || "Reservation failed. Please try again.");
     } finally {
       setLoading(false);
